@@ -13,7 +13,7 @@ while h:
 	h = x.getNextHour()
 
 with urllib.request.urlopen("https://graphdata.buienradar.nl/forecast/jsonsun/?type=sun&lat=52.4&lon=5.28") as urldata:
-	dat =json.load(urldata)
+	dat = json.load(urldata)
 
 y = SunForecast(dat)
 print(y.getFirstHourSunshine())
