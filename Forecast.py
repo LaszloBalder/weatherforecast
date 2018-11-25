@@ -1,40 +1,3 @@
-#{"datetime":"2018-11-22T16:00:00","datetimeutc":"2018-11-22T15:00:00","timetype":"Hour","precipitationmm":0.0,
-#"temperature":3.8,"feeltemperature":0.4,"cloudcover":100,"iconcode":"c","iconid":20,"sources":3,
-#"winddirection":"O","winddirectiondegrees":112,"windspeedms":4.0,"visibility":16620,"precipitation":0,
-#"beaufort":3,"humidity":74,"sunshine":0,"hour":16,"pollenindex":1,"windspeed":14,"sunshinepower":11,"sunpower":11}
-
-class FrcstHour:
-	def __init__(self, data):
-		self.data = data
-
-	def getHour(self):
-		return self.data['hour']
-	
-	def getPrecipitationPerc(self):
-		return float(self.data['precipitation']) / 100.0
-
-	def getSunshinePerc(self):
-		return float(self.data['sunshine']) / 100.0
-
-	def getSunshinePower(self):
-		if 'sunpower' in self.data:
-			return float(self.data['sunpower'])
-		else:
-			return float(self.data['sunshinepower'])
-
-	def getCloudCoverPerc(self):
-		return float(self.data['cloudcover']) / 100.0
-
-	def getLight(self):
-		return self.getSunshinePower() * (1 - self.getCloudCoverPerc())
-
-	def getTemperature(self):
-		return float(self.data['temperature'])
-
-	def getData(self):
-		return self.data
-
-
 class Forecast:
 	def __init__(self, data):
 		self.data = data
@@ -81,6 +44,42 @@ class Forecast:
 			return None
 		return FrcstDay(self.data['days'][self.currentDay])
 		
+#{"datetime":"2018-11-22T16:00:00","datetimeutc":"2018-11-22T15:00:00","timetype":"Hour","precipitationmm":0.0,
+#"temperature":3.8,"feeltemperature":0.4,"cloudcover":100,"iconcode":"c","iconid":20,"sources":3,
+#"winddirection":"O","winddirectiondegrees":112,"windspeedms":4.0,"visibility":16620,"precipitation":0,
+#"beaufort":3,"humidity":74,"sunshine":0,"hour":16,"pollenindex":1,"windspeed":14,"sunshinepower":11,"sunpower":11}
+
+class FrcstHour:
+	def __init__(self, data):
+		self.data = data
+
+	def getHour(self):
+		return self.data['hour']
+	
+	def getPrecipitationPerc(self):
+		return float(self.data['precipitation']) / 100.0
+
+	def getSunshinePerc(self):
+		return float(self.data['sunshine']) / 100.0
+
+	def getSunshinePower(self):
+		if 'sunpower' in self.data:
+			return float(self.data['sunpower'])
+		else:
+			return float(self.data['sunshinepower'])
+
+	def getCloudCoverPerc(self):
+		return float(self.data['cloudcover']) / 100.0
+
+	def getLight(self):
+		return self.getSunshinePower() * (1 - self.getCloudCoverPerc())
+
+	def getTemperature(self):
+		return float(self.data['temperature'])
+
+	def getData(self):
+		return self.data
+
 class FrcstDay:
 	def __init__(self, data):
 		self.data = data
